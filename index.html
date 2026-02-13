@@ -8,19 +8,19 @@
   <meta name="description" content="A simple resume template built with Flask, based on Start Bootstrap resume template.">
   <meta name="author" content="Rodolfo Ferro <rodolfoferro@gmail.com>">
 
-  <title>Portfolio - {{ data.profile.first_name }} {{ data.profile.last_name }}</title>
+  <title>Portfolio - {{ site.profile.first_name }} {{ site.profile.last_name }}</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
   <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
-  <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="static/css/resume.css" rel="stylesheet">
-  <link rel="shortcut icon" href="static/img/comp_13.gif" type="image/x-icon">
+  <link href="assets/css/resume.css" rel="stylesheet">
+  <link rel="shortcut icon" href="assets/img/comp_13.gif" type="image/x-icon">
 
 </head>
 
@@ -28,9 +28,9 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
-      <span class="d-block d-lg-none text-white subheading">{{ data.profile.first_name }} {{ data.profile.last_name }}</span>
+      <span class="d-block d-lg-none text-white subheading">{{ site.profile.first_name }} {{ site.profile.last_name }}</span>
       <span class="d-none d-lg-block">
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ data.profile.picture }}" alt="">
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ site.profile.picture }}" alt="">
       </span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,23 +67,23 @@
 
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
       <div class="w-100">
-        <h1 class="mb-0">{{ data.profile.first_name }}
-          <span class="text-primary">{{ data.profile.last_name }}</span>
+        <h1 class="mb-0">{{ site.profile.first_name }}
+          <span class="text-primary">{{ site.profile.last_name }}</span>
         </h1>
         <div class="subheading mb-5">
-          {% for item in data.profile.contact.values() %}
+          {% for item in site.profile.contact.values() %}
           {% if item != None %}
           {{ item }} ·
           {% endif %}
           {% endfor %}
-          <a href="mailto:{{ data.profile.email }}">{{ data.profile.email }}</a>
+          <a href="mailto:{{ site.profile.email }}">{{ site.profile.email }}</a>
         </div>
-        <p class="lead mb-5">{{ data.profile.description }}</p>
+        <p class="lead mb-5">{{ site.profile.description }}</p>
         <div class="social-icons">
-        {% for key, value in data.social.items() %}
+        {% for key, value in site.social.items() %}
         {% if value != None %}
           {% if key == 'website' %}
-          <a href="{{ data.social.website }}" target="_blank">
+          <a href="{{ site.social.website }}" target="_blank">
             <i class="fas fa-globe-americas"></i>
           </a>
           {% else %}
@@ -105,7 +105,7 @@
 
         <div class="subheading mb-3">Programming Languages &amp; Tools</div>
         <ul class="list-inline dev-icons">
-          {% for item in data.tools %}
+          {% for item in site.tools %}
           <li class="list-inline-item">
             <i class="fab fa-{{ item }}"></i>
           </li>
@@ -114,7 +114,7 @@
 
         <div class="subheading mb-3">Extra skills / knowledge</div>
         <ul class="fa-ul mb-0">
-          {% for item in data.extra_skills %}
+          {% for item in site.extra_skills %}
           <li>
             <i class="fa-li fa fa-check"></i>
             {{ item }}</li>
@@ -129,7 +129,7 @@
       <div class="w-100">
         <h2 class="mb-5">Experience</h2>
 
-        {% for _, item in data.experience.items() %}
+        {% for _, item in site.experience.items() %}
         {% if _ != 'reference' %}
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
@@ -158,7 +158,7 @@
       <div class="w-100">
         <h2 class="mb-5">Education</h2>
 
-        {% for _, item in data.education.items() %}
+        {% for _, item in site.education.items() %}
         {% if _ != 'reference' %}
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
@@ -184,7 +184,7 @@
       <div class="w-100">
         <h2 class="mb-5">Scientific Production</h2>
         <ul class="fa-ul mb-0">
-          {% for _, item in data.production.items() %}
+          {% for _, item in site.production.items() %}
           <li>
             {% if _ != 'reference' %}
             <i class="fa-li fa fa-shapes text-info"></i>
@@ -204,9 +204,9 @@
           </li>
           {% endfor %}
         </ul>
-        {% if 'reference' in data.production.keys() %}
+        {% if 'reference' in site.production.keys() %}
         <br><br>
-        <p>For a detailed reference about this section, please visit <a href="{{ data.production.reference }}" target="_blank">this link</a>.</p>
+        <p>For a detailed reference about this section, please visit <a href="{{ site.production.reference }}" target="_blank">this link</a>.</p>
         {% endif %}
       </div>
     </section>
@@ -219,10 +219,10 @@
         <p>This section contains awesome projects that I've developed:</p>
         <!-- Begins card -->
         <div class="row">
-          {% for _, item in data.projects.items() %}
+          {% for _, item in site.projects.items() %}
           <div class="col-md-4 mb-5">
             <div class="card h-100">
-              <img src="static/img/{{ item.img }}" class="card-img-top" alt="{{ item.title }}">
+              <img src="assets/img/{{ item.img }}" class="card-img-top" alt="{{ item.title }}">
               <div class="card-body">
                 <h3 class="card-title">{{ item.title }}</h3>
                 <h5 class="card-title">{{ item.subtitle }}</h5>
@@ -256,7 +256,7 @@
       <div class="w-100">
         <h2 class="mb-5">Certifications &amp; Courses</h2>
         <ul class="fa-ul mb-0">
-          {% for item in data.courses %}
+          {% for item in site.courses %}
           <li>
             <i class="fa-li fa fa-trophy text-warning"></i>
             {{ item.title }}
@@ -274,14 +274,14 @@
   </div>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="static/vendor/jquery/jquery.min.js"></script>
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
-  <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="static/js/resume.min.js"></script>
+  <script src="assets/js/resume.min.js"></script>
 
 </body>
 
