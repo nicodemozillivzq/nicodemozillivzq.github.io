@@ -116,6 +116,8 @@ tools:
   - linux
   - centos
 
+  - odoo
+
 extra_skills:
   - Odoo ERP customizations and deployments (Odoo SH)
   - Docker and DevOps practices
@@ -130,7 +132,7 @@ production:
   item1:
     event: Coloquio de Investigación Multidisciplinaria (CIM), October 2018 – TecNM Campus Orizaba
     topic: "Análisis de la realidad del aprendizaje de programación en el Instituto Tecnológico de Orizaba"
-    material: static/docs/material-CIM2018.pdf
+    material: assets/docs/material-CIM2018.pdf
     link: http://cim.orizaba.tecnm.mx/?page_id=161
 
   item2:
@@ -139,7 +141,7 @@ production:
       Official certificate of registration granted by Indautor (Instituto Nacional del Derecho de Autor) 
       for "MARCO DE SERVICIOS DE CALCULO DE CALIDAD DE ARQUITECTURAS DE SOFTWARE". This registration ensures intellectual property 
       protection and authorship recognition.
-    material: /static/docs/2022-2-10151403%20CERTIFICADO.PDF
+    material: /assets/docs/2022-2-10151403%20CERTIFICADO.PDF
     link:
    
   
@@ -150,7 +152,7 @@ projects:
     subtitle: Software Architecture Quality Calculation Services Framework
     description: A Java backend application that waits for connections from a frontend app for quality calculations.
     link:
-    github: https://github.com/NicodemoZilli/PR-MarcoMCAS-GUIServer-IJ
+    github: https://github.com/nicodemozillivzq/PR-MarcoMCAS-GUIServer-IJ
     img: msccas.png
     tags: [JAVA, JSON, HTTP]
 
@@ -158,34 +160,25 @@ projects:
     title: GUI - MSCCAS
     subtitle: Test interface for the Software Architecture Quality Calculation Services Framework
     description: A PHP-HTML-JS frontend test web application for quality calculations.
-    link: http://www.nicodemozilli.systems/smmcas/
-    github: https://github.com/NicodemoZilli/PR-MarcoMCAS-Web-Frontend
+    link: 
+    github: https://github.com/nicodemozillivzq/PR-MarcoMCAS-Web-Frontend
     img: gui-msccas.png
     tags: [PHP, HTML5, JS, CSS3]
 
   item3:
-    title: flask-resume-template
-    subtitle: A resume template built with Flask
-    description: An easy-to-configure, simple resume template built with Flask and Bootstrap.
-    link: https://nicodemozilli.glitch.me
-    github: https://github.com/NicodemoZilli/flask-based-resume-nicodemozilli/
-    img: flask-resume-template.png
-    tags: [Flask, Python, Bootstrap]
-
-  item4:
     title: NMD
     subtitle: No Mask Detector
     description: A mask detector webpage powered by Ml5.js
-    link: https://nicodemozilli.github.io/NMD/
-    github: https://github.com/NicodemoZilli/NMD/
+    link: https://nicodemozillivzq.github.io/NMD/
+    github: https://github.com/nicodemozillivzq/NMD
     img: NMD-Capture.png
     tags: [ML5.js, P5.js, HTML]
     
-  item5:
+  item4:
     title: SAT Blacklist 69-B Odoo Module
     subtitle: Odoo module for Mex SAT 69-B list
     description: Ensure compliance by integrating the SAT Blacklist (Lista del Artículo 69-B) in Odoo
-    link: https://apps.odoo.com/apps/modules/17.0/lista_negra_sat_69B
+    link: 
     github:
     img: thumbnail_icon.png
     tags: [Odoo, Odoo 17, ERP, SAT]
