@@ -3,11 +3,11 @@ profile:
   first_name: David Nicodemo
   last_name: Zilli Vazquez
   # Local or hosted picture path
-  picture: static/img/nicodemo.jpg
+  picture: assets/img/nicodemo.jpg
   contact:
     address_one: Tlatelolco, Cuauhtémoc, CDMX
     address_two:
-    phone: Ask 4 it!  # Replace with your phone if desired
+    phone:  # Replace with your phone if desired
   email: nicozv13@gmail.com
   description: >
     I'm a Computer Systems Engineer specializing in web engineering, full-stack development, and Odoo implementations.
@@ -18,7 +18,7 @@ profile:
 
 # Social section
 social:
-  website: https://nicodemozillivz.glitch.me
+  website: https://nicodemozillivzq.github.io
   github: https://github.com/nicodemozillivzq
   twitter: https://twitter.com/ZvNico/
   linkedin: https://www.linkedin.com/in/nicodemozilli/
