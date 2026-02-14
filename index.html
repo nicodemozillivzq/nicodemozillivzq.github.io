@@ -74,7 +74,7 @@
           <span class="text-primary">{{ site.profile.last_name }}</span>
         </h1>
         <div class="subheading mb-5">
-          {% for item in site.profile.contact.values() %}
+          {% for item in site.profile.contact %}
           {% if item != None %}
           {{ item }} ·
           {% endif %}
@@ -83,7 +83,9 @@
         </div>
         <p class="lead mb-5">{{ site.profile.description }}</p>
         <div class="social-icons">
-        {% for key, value in site.social.items() %}
+        {% for pair in site.social %}
+        {% set key = pair[0] %}
+        {% set value = pair[1] %}
         {% if value != None %}
           {% if key == 'website' %}
           <a href="{{ site.social.website }}" target="_blank">
@@ -132,8 +134,10 @@
       <div class="w-100">
         <h2 class="mb-5">Experience</h2>
 
-        {% for _, item in site.experience.items() %}
-        {% if _ != 'reference' %}
+        {% for pair in site.experience %}
+        {% set key = pair[0] %}
+        {% set item = pair[1] %}
+        {% if key != 'reference' %}
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
             <h3 class="mb-0">{{ item.position }}</h3>
@@ -161,8 +165,10 @@
       <div class="w-100">
         <h2 class="mb-5">Education</h2>
 
-        {% for _, item in site.education.items() %}
-        {% if _ != 'reference' %}
+        {% for pair in site.education %}
+        {% set key = pair[0] %}
+        {% set item = pair[1] %}
+        {% if key != 'reference' %}
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
             <h3 class="mb-0">{{ item.institution }}</h3>
@@ -187,9 +193,11 @@
       <div class="w-100">
         <h2 class="mb-5">Scientific Production</h2>
         <ul class="fa-ul mb-0">
-          {% for _, item in site.production.items() %}
+          {% for pair in site.production %}
+          {% set key = pair[0] %}
+          {% set item = pair[1] %}
           <li>
-            {% if _ != 'reference' %}
+            {% if key != 'reference' %}
             <i class="fa-li fa fa-shapes text-info"></i>
             <strong>{{ item.event }}</strong>
             {% if item.material != None %}
@@ -222,7 +230,9 @@
         <p>This section contains awesome projects that I've developed:</p>
         <!-- Begins card -->
         <div class="row">
-          {% for _, item in site.projects.items() %}
+          {% for pair in site.projects %}
+          {% set key = pair[0] %}
+          {% set item = pair[1] %}
           <div class="col-md-4 mb-5">
             <div class="card h-100">
               <img src="assets/img/{{ item.img }}" class="card-img-top" alt="{{ item.title }}">
