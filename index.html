@@ -1,3 +1,7 @@
+---
+layout: null
+---
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,21 +10,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="A simple resume template built with Flask, based on Start Bootstrap resume template.">
-  <meta name="author" content="Rodolfo Ferro <rodolfoferro@gmail.com>">
+  <meta name="author" content="{{ site.profile.first_name }} {{ site.profile.last_name }}">
 
   <title>Portfolio - {{ site.profile.first_name }} {{ site.profile.last_name }}</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="assetvendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ site.baseurl }}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
   <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
-  <link href="assetvendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="{{ site.baseurl }}/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="assetcss/resume.css" rel="stylesheet">
-  <link rel="shortcut icon" href="assetimg/comp_13.gif" type="image/x-icon">
+  <link href="{{ site.baseurl }}/assets/css/resume.css" rel="stylesheet">
+  <link rel="shortcut icon" href="{{ site.baseurl }}/assets/img/comp_13.gif" type="image/x-icon">
 
 </head>
 
@@ -33,42 +37,46 @@
         <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ site.profile.picture }}" alt="">
       </span>
     </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#production">Scientific Production</a></li>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#certifications">Certifications</a></li>
+      </ul>
+    </div>
   </nav>
 
   <div class="container-fluid p-0">
 
-    <!-- ABOUT -->
+    <!-- ========== ABOUT ========== -->
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
       <div class="w-100">
         <h1 class="mb-0">{{ site.profile.first_name }}
           <span class="text-primary">{{ site.profile.last_name }}</span>
         </h1>
-
         <div class="subheading mb-5">
-          {% for pair in site.profile.contact %}
-            {% assign item = pair[1] %}
-            {% if item %}
-              {{ item }} ·
-            {% endif %}
+          {% for item in site.profile.contact %}
+            {% if item[1] %}{{ item[1] }} ·{% endif %}
           {% endfor %}
           <a href="mailto:{{ site.profile.email }}">{{ site.profile.email }}</a>
         </div>
-
         <p class="lead mb-5">{{ site.profile.description }}</p>
-
         <div class="social-icons">
-          {% for pair in site.social %}
-            {% assign key = pair[0] %}
-            {% assign value = pair[1] %}
+          {% for item in site.social %}
+            {% assign key   = item[0] %}
+            {% assign value = item[1] %}
             {% if value %}
               {% if key == 'website' %}
-                <a href="{{ site.social.website }}" target="_blank">
-                  <i class="fas fa-globe-americas"></i>
-                </a>
+                <a href="{{ value }}" target="_blank"><i class="fas fa-globe-americas"></i></a>
               {% else %}
-                <a href="{{ value }}" target="_blank">
-                  <i class="fab fa-{{ key }}"></i>
-                </a>
+                <a href="{{ value }}" target="_blank"><i class="fab fa-{{ key }}"></i></a>
               {% endif %}
             {% endif %}
           {% endfor %}
@@ -78,111 +86,193 @@
 
     <hr class="m-0">
 
-    <!-- EXPERIENCE -->
+    <!-- ========== SKILLS ========== -->
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="skills">
+      <div class="w-100">
+        <h2 class="mb-5">Skills</h2>
+
+        <div class="subheading mb-3">Programming Languages &amp; Tools</div>
+        <ul class="list-inline dev-icons">
+          {% for item in site.tools %}
+          <li class="list-inline-item"><i class="fab fa-{{ item }}"></i></li>
+          {% endfor %}
+        </ul>
+
+        <div class="subheading mb-3">Extra skills / knowledge</div>
+        <ul class="fa-ul mb-0">
+          {% for item in site.extra_skills %}
+          <li><i class="fa-li fa fa-check"></i>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <!-- ========== EXPERIENCE ========== -->
     <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="experience">
       <div class="w-100">
         <h2 class="mb-5">Experience</h2>
 
-        {% for pair in site.experience %}
-          {% assign _ = pair[0] %}
-          {% assign item = pair[1] %}
-
-          {% if _ != 'reference' %}
+        {% for item in site.experience %}
+          {% assign key  = item[0] %}
+          {% assign data = item[1] %}
+          {% if key == 'reference' %}
+            <p>For a detailed reference about this section, please visit <a href="{{ data }}" target="_blank">this link</a>.</p>
+          {% else %}
             <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
               <div class="resume-content">
-                <h3 class="mb-0">{{ item.position }}</h3>
-                <div class="subheading mb-3">{{ item.company }}</div>
-                <p>{{ item.description }}</p>
-                {% if item.link %}
-                  <p><a href="{{ item.link }}">Reference link.</a></p>
-                {% endif %}
+                <h3 class="mb-0">{{ data.position }}</h3>
+                <div class="subheading mb-3">{{ data.company }}</div>
+                <p>{{ data.description }}</p>
+                {% if data.link %}<p><a href="{{ data.link }}">Reference link.</a></p>{% endif %}
               </div>
               <div class="resume-date text-md-right">
-                <span class="text-primary">{{ item.from }} - {{ item.to }}</span>
+                <span class="text-primary">{{ data.from }} - {{ data.to }}</span>
               </div>
             </div>
-          {% else %}
-            <p>For a detailed reference about this section, please visit <a href="{{ item }}" target="_blank">this link</a>.</p>
           {% endif %}
         {% endfor %}
+
       </div>
     </section>
 
     <hr class="m-0">
 
-    <!-- EDUCATION -->
+    <!-- ========== EDUCATION ========== -->
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="education">
       <div class="w-100">
         <h2 class="mb-5">Education</h2>
 
-        {% for pair in site.education %}
-          {% assign _ = pair[0] %}
-          {% assign item = pair[1] %}
-
-          {% if _ != 'reference' %}
+        {% for item in site.education %}
+          {% assign key  = item[0] %}
+          {% assign data = item[1] %}
+          {% if key == 'reference' %}
+            <p>For a detailed reference about this section, please visit <a href="{{ data }}" target="_blank">this link</a>.</p>
+          {% else %}
             <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
               <div class="resume-content">
-                <h3 class="mb-0">{{ item.institution }}</h3>
-                <div class="subheading mb-3">{{ item.program }}</div>
-                <div>{{ item.description }}</div><br>
-                <p><strong>{{ item.cedprof }}</strong></p>
+                <h3 class="mb-0">{{ data.institution }}</h3>
+                <div class="subheading mb-3">{{ data.program }}</div>
+                <div>{{ data.description }}</div><br>
+                <p><strong>{{ data.cedprof }}</strong></p>
               </div>
               <div class="resume-date text-md-right">
-                <span class="text-primary">{{ item.from }} - {{ item.to }}</span>
+                <span class="text-primary">{{ data.from }} - {{ data.to }}</span>
               </div>
             </div>
-          {% else %}
-            <p>For a detailed reference about this section, please visit <a href="{{ item }}" target="_blank">this link</a>.</p>
           {% endif %}
         {% endfor %}
+
       </div>
     </section>
 
     <hr class="m-0">
 
-    <!-- PRODUCTION -->
+    <!-- ========== SCIENTIFIC PRODUCTION ========== -->
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="production">
       <div class="w-100">
         <h2 class="mb-5">Scientific Production</h2>
-
         <ul class="fa-ul mb-0">
-          {% for pair in site.production %}
-            {% assign _ = pair[0] %}
-            {% assign item = pair[1] %}
-
-            {% if _ != 'reference' %}
-              <li>
-                <i class="fa-li fa fa-shapes text-info"></i>
-                <strong>{{ item.event }}</strong>
-
-                {% if item.material %}
-                  <sup><a href="{{ item.material }}" target="_blank" class="badge badge-pill badge-primary">
-                    Material
-                  </a></sup>
-                {% endif %}
-
-                {% if item.link %}
-                  <sup><a href="{{ item.link }}" target="_blank" class="badge badge-pill badge-danger">
-                    Event site
-                  </a></sup>
-                {% endif %}
-
-                <br> {{ item.topic }}
-              </li>
-            {% endif %}
+          {% for item in site.production %}
+            {% assign key  = item[0] %}
+            {% assign data = item[1] %}
+            {% unless key == 'reference' %}
+            <li>
+              <i class="fa-li fa fa-shapes text-info"></i>
+              <strong>{{ data.event }}</strong>
+              {% if data.material %}
+              <sup><a href="{{ data.material }}" target="_blank" class="badge badge-pill badge-primary">
+                Material <i class="fa fa-external-link-alt text-light"></i>
+              </a></sup>
+              {% endif %}
+              {% if data.link %}
+              <sup><a href="{{ data.link }}" target="_blank" class="badge badge-pill badge-danger">
+                Event site <i class="fa fa-external-link-alt text-light"></i>
+              </a></sup>
+              {% endif %}
+              <br>{{ data.topic }}
+            </li>
+            {% endunless %}
           {% endfor %}
         </ul>
-
         {% if site.production.reference %}
-          <br><br>
-          <p>For a detailed reference about this section, please visit
-            <a href="{{ site.production.reference }}" target="_blank">this link</a>.
-          </p>
+        <br><br>
+        <p>For a detailed reference about this section, please visit <a href="{{ site.production.reference }}" target="_blank">this link</a>.</p>
         {% endif %}
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <!-- ========== PROJECTS ========== -->
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="projects">
+      <div class="w-100">
+        <h2 class="mb-5">Projects</h2>
+        <p>This section contains awesome projects that I've developed:</p>
+        <div class="row">
+          {% for item in site.projects %}
+            {% assign data = item[1] %}
+            <div class="col-md-4 mb-5">
+              <div class="card h-100">
+                <img src="{{ site.baseurl }}/assets/img/{{ data.img }}" class="card-img-top" alt="{{ data.title }}">
+                <div class="card-body">
+                  <h3 class="card-title">{{ data.title }}</h3>
+                  <h5 class="card-title">{{ data.subtitle }}</h5>
+                  <p class="card-text">{{ data.description }}</p>
+                  <p>
+                    {% for tag in data.tags %}
+                    <span class="badge badge-pill badge-secondary">{{ tag }}</span>
+                    {% endfor %}
+                  </p>
+                </div>
+                <div class="card-footer">
+                  {% if data.github %}
+                  <a href="{{ data.github }}" class="text-dark" target="_blank">
+                    <i class="fab fa-github-square fa-2x"></i>
+                  </a>
+                  {% endif %}
+                  {% if data.link %}
+                  <a href="{{ data.link }}" class="btn btn-dark float-right" target="_blank">View project</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <!-- ========== CERTIFICATIONS ========== -->
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="certifications">
+      <div class="w-100">
+        <h2 class="mb-5">Certifications &amp; Courses</h2>
+        <ul class="fa-ul mb-0">
+          {% for item in site.courses %}
+          <li>
+            <i class="fa-li fa fa-trophy text-warning"></i>
+            {{ item.title }}
+            {% if item.link %}
+            <sup><a href="{{ item.link }}" target="_blank" class="badge badge-pill badge-danger">
+              View Certificate <i class="fa fa-external-link-alt text-light"></i>
+            </a></sup>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
       </div>
     </section>
 
   </div>
 
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ site.baseurl }}/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="{{ site.baseurl }}/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ site.baseurl }}/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/resume.min.js"></script>
+
 </body>
+
 </html>
